@@ -5,3 +5,5 @@ Este projeto é uma automação desenvolvida para um freelancer. Consiste em ent
 * conversor.py -> Arquivo responsável pela ferramenta de conversão dos arquivos baixados em xls(arquivo antigo do excel) em xlsx(arquivo mais recente do excel). Ou seja, a ferramenta pega os arquivos de uma pasta chama "Old Version" e transferi os arquivos, já convertidos, para a pasta "New Version".
 * transferir.py -> Ferramenta responsável por transferi-lo o arquivo baxado para a pasta "Old Version"(que consiste nos arquivos xls).
 * ultimo_arquivo.py -> Ferramenta responsável por encontrar o arquivo baixado no pc.
+
+  obs: Adicionar pastas -> Old Version, New Version, 2020, 2021, 2022.

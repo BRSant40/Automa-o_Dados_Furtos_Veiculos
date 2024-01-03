@@ -8,7 +8,7 @@ from conversor import conversor_xls # Converte xls em xlsx
 import pandas as pd
 import os # Ajuda a acessar arquivos e diretórios no pc
 import shutil # Ajuda a mover arquivos para outras pastas
-from encontrar import encontrar_pasta # Encontrar pasta da Automação no PC
+#from encontrar import encontrar_pasta # Encontrar pasta da Automação no PC
 
 # Entrar no site -> https://www.ssp.sp.gov.br/transparenciassp/Consulta2022.aspx
 driver = webdriver.Chrome()
@@ -20,7 +20,7 @@ furto_veiculo = driver.find_element(By.XPATH, '//*[@id="cphBody_btnFurtoVeiculo"
 furto_veiculo.click()
 sleep(10)
 
-# Clicar nos anos: 2020, 2021 e 2022
+#Clicar nos anos: 2020, 2021 e 2022
 for n in range(20, 23):
     pyautogui.scroll(-800)
     sleep(5)
@@ -36,13 +36,14 @@ for n in range(20, 23):
         sleep(15)
         exportar = driver.find_element(By.XPATH, '//*[@id="cphBody_ExportarBOLink"]')
         exportar.click()
-        sleep(130)
+        sleep(100)
         transferir()
 
 conversor_xls()
 
 # Laço transformando em CSV - Último
-pasta = encontrar_pasta()
+#pasta = encontrar_pasta()
+pasta = os.getcwd()
 sleep(15)
 with os.scandir('new version') as novos:
     for n in novos:
@@ -52,14 +53,34 @@ with os.scandir('new version') as novos:
         novo_csv.close()
 
         if '2020' in novo_csv.name:
-            file_source = pasta + f'\{novo_csv.name}'
-            file_destination = pasta + '\\2020'
+            p = pasta + '\\2020'
+            if os.path.exists(p):  # SE A PASTA JÁ EXISTE, ENTÃO PASSAR OS ARQUIVOS...
+                file_source = pasta + f'\{novo_csv.name}'
+                file_destination = pasta + '\\2020'
+            else:
+                os.makedirs(p)
+                file_source = pasta + f'\{novo_csv.name}'
+                file_destination = pasta + '\\2020'
+
         elif '2021' in novo_csv.name:
-            file_source = pasta + f'\{novo_csv.name}'
-            file_destination = pasta + '\\2021'
-        else:
-            file_source = pasta + f'\{novo_csv.name}'
-            file_destination = pasta + '\\2022'
+            p = pasta + '\\2021'
+            if os.path.exists(p):  # SE A PASTA JÁ EXISTE, ENTÃO PASSAR OS ARQUIVOS...
+                file_source = pasta + f'\{novo_csv.name}'
+                file_destination = pasta + '\\2021'
+            else:
+                os.makedirs(p)
+                file_source = pasta + f'\{novo_csv.name}'
+                file_destination = pasta + '\\2021'
+
+        elif '2022' in novo_csv.name:
+            p = pasta + '\\2022'
+            if os.path.exists(p):  # SE A PASTA JÁ EXISTE, ENTÃO PASSAR OS ARQUIVOS...
+                file_source = pasta + f'\{novo_csv.name}'
+                file_destination = pasta + '\\2022'
+            else:
+                os.makedirs(p)
+                file_source = pasta + f'\{novo_csv.name}'
+                file_destination = pasta + '\\2022'
 
         shutil.move(file_source, file_destination)
 

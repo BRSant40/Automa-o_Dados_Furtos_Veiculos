@@ -8,7 +8,7 @@ def transferir():
     arquivo = ult_arq()
     #pasta = encontrar_pasta()
     pasta = os.getcwd()
-    sleep(25)
+    #sleep(25)
 
     home = os.environ['HOMEPATH']
     downloads = home + '\Downloads'

@@ -44,7 +44,7 @@ conversor_xls()
 # Laço transformando em CSV - Último
 #pasta = encontrar_pasta()
 pasta = os.getcwd()
-sleep(15)
+#sleep(15)
 with os.scandir('new version') as novos:
     for n in novos:
         with open(f'{n.name}.csv', 'w') as novo_csv:

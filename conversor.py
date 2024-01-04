@@ -6,7 +6,7 @@ def conversor_xls():
     excel = client.Dispatch("excel.application")
     #pasta = encontrar_pasta()
     pasta = os.getcwd()
-    sleep(15)
+    #sleep(15)
 
     p = pasta + '/old version'
     if os.path.exists(p) == False:
